@@ -1,0 +1,54 @@
+create database veiculos;
+use veiculos;
+
+create table cliente (
+id_cliente int not null auto_increment,
+nome varchar(70) not null,
+datanas date not null, 
+
+primary key(id_cliente)
+);
+
+create table modelo (
+	id_modelo int not null auto_increment,
+    descricao varchar(40) not null,
+    
+    primary key(id_modelo)
+);
+
+create table patio (
+id_patio int not null auto_increment,
+cidade varchar(30) not null,
+bairro varchar(30) not null,
+rua varchar(30) not null,
+numero int not null,
+capacidade int,
+
+primary key(id_patio)
+);
+
+create table veiculo (
+id_veiculo int not null auto_increment,
+placa varchar(9) not null,
+cor varchar(30) not null,
+fk_modelo int,
+fk_cliente int,
+
+primary key(id_veiculo),
+foreign key(fk_modelo) references modelo(id_modelo),
+foreign key(fk_cliente) references cliente(id_cliente)
+);
+
+create table estacina (
+id_estaciona int not null auto_increment,
+fk_patio int,
+fk_veiculo int,
+dt_entrada date not null,
+dt_saida date not null,
+hr_entrada varchar(5) not null,
+hr_saida varchar(5) not null,
+
+primary key(id_estaciona),
+foreign key(fk_patio) references patio(id_patio),
+foreign key(fk_veiculo) references patio(id_veiculo)
+);
